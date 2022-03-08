@@ -1,7 +1,7 @@
 ﻿using Oracle.Dapper.NetCore.Infrastructure;
 using Oracle.Dapper.NetCore.Storage.Oracle;
 
-namespace Oracle.Dapper.NetCore.Dapper
+namespace Oracle.Dapper.NetCore.Context
 {
     public class OracleContext : OracleDbConnection, IDbContext
     {
@@ -9,7 +9,7 @@ namespace Oracle.Dapper.NetCore.Dapper
         {
             ConnectionString = connectionString;
             CreateDbConnection();
-            OpenDbConnection(true);
+            OpenOracleConnection(true);
         }
     }
 }

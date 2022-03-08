@@ -1,5 +1,6 @@
 ﻿using Oracle.Dapper.NetCore.Dapper;
 using Oracle.ManagedDataAccess.Client;
+using Polly.Retry;
 using System.Data.Common;
 
 namespace Oracle.Dapper.NetCore.Storage.Oracle
@@ -7,19 +8,21 @@ namespace Oracle.Dapper.NetCore.Storage.Oracle
     public class OracleDbConnection : RelationalConnection, IOracleDbConnection
     {
         private IDapperFeatures _database;
+        private readonly IRetryPolicy _retryPolicy;
+
+        public OracleDbConnection()
+        {
+            _retryPolicy = new DatabaseCommunicationRetryPolicy();
+        }
+
         public virtual IDapperFeatures Database { get => _database ?? GetDatabaseInstance(); }
 
-        protected override void OpenDbConnection(bool errorsExpected)
+        protected void OpenOracleConnection(bool errorsExpected)
         {
-            if (errorsExpected
-                && DbConnection is OracleConnection oracleConnection)
+            _retryPolicy.Execute(() =>
             {
-                oracleConnection.Open();
-            }
-            else
-            {
-                DbConnection.Open();
-            }
+                Open(errorsExpected);
+            });
         }
 
         protected override DbConnection CreateDbConnection()

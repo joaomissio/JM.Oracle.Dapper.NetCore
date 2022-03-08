@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Oracle.Dapper.NetCore", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{375E249C-C566-419E-B643-3716747DD7DB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5860A90E-A19A-40CF-8D70-7F62BA5FE375}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oracle.Dapper.NetCore.Console.Example", "samples\Oracle.Dapper.NetCore.Console.Example\Oracle.Dapper.NetCore.Console.Example.csproj", "{6003ECDD-6B41-44F7-B8DA-E7ABE145B836}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,17 @@ Global
 		{55F74E3A-14D2-4107-A412-E6DB32D09F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55F74E3A-14D2-4107-A412-E6DB32D09F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55F74E3A-14D2-4107-A412-E6DB32D09F39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6003ECDD-6B41-44F7-B8DA-E7ABE145B836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6003ECDD-6B41-44F7-B8DA-E7ABE145B836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6003ECDD-6B41-44F7-B8DA-E7ABE145B836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6003ECDD-6B41-44F7-B8DA-E7ABE145B836}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{55F74E3A-14D2-4107-A412-E6DB32D09F39} = {375E249C-C566-419E-B643-3716747DD7DB}
+		{6003ECDD-6B41-44F7-B8DA-E7ABE145B836} = {5860A90E-A19A-40CF-8D70-7F62BA5FE375}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CEADCD6-E13E-4E5C-BF72-2983EFB03709}

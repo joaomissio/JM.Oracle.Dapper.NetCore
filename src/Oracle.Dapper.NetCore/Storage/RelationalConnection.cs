@@ -1,4 +1,5 @@
 ﻿using Oracle.Dapper.NetCore.Infrastructure;
+using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Data;
 using System.Data.Common;
@@ -150,7 +151,17 @@ namespace Oracle.Dapper.NetCore.Storage
         protected abstract DbConnection CreateDbConnection();
 
         protected virtual void OpenDbConnection(bool errorsExpected)
-            => DbConnection.Open();
+        {
+            if (errorsExpected
+                 && DbConnection is OracleConnection oracleConnection)
+            {
+                oracleConnection.Open();
+            }
+            else
+            {
+                DbConnection.Open();
+            }
+        }
 
         protected virtual void CloseDbConnection()
             => DbConnection.Close();

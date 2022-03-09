@@ -17,12 +17,9 @@ namespace Oracle.Dapper.NetCore.Storage.Oracle
 
         public virtual IDapperFeatures Database { get => _database ?? GetDatabaseInstance(); }
 
-        protected void OpenOracleConnection(bool errorsExpected)
+        public void OpenOracleConnection(bool errorsExpected)
         {
-            _retryPolicy.Execute(() =>
-            {
-                Open(errorsExpected);
-            });
+            _retryPolicy.Execute(() => Open(errorsExpected));
         }
 
         protected override DbConnection CreateDbConnection()

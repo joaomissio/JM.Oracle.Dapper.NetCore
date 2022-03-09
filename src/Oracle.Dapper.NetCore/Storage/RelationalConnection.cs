@@ -80,7 +80,7 @@ namespace Oracle.Dapper.NetCore.Storage
                 transactionId,
                 transactionOwned: transactionOwned);
 
-        private RelationalTransaction CreateRelationalTransaction(IRelationalConnection connection, DbTransaction transaction, Guid transactionId, bool transactionOwned)
+        private static RelationalTransaction CreateRelationalTransaction(IRelationalConnection connection, DbTransaction transaction, Guid transactionId, bool transactionOwned)
             => new RelationalTransaction(connection, transaction, transactionId, transactionOwned);
 
         public virtual void CommitTransaction()

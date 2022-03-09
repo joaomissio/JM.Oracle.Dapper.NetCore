@@ -5,5 +5,6 @@ namespace Oracle.Dapper.NetCore.Storage.Oracle
     public interface IOracleDbConnection : IRelationalConnection
     {
         IDapperFeatures Database { get; }
+        void OpenOracleConnection(bool errorsExpected);
     }
 }

@@ -8,7 +8,7 @@ namespace Oracle.Dapper.NetCore.Console.Example.Core
     public abstract class BackgroundService : IHostedService, IDisposable
     {
         private Task _executingTask;
-        private readonly CancellationTokenSource _stoppingCts = new CancellationTokenSource();
+        private readonly CancellationTokenSource _stoppingCts = new();
 
         protected abstract Task ExecuteAsync(CancellationToken stoppingToken);
 
@@ -35,7 +35,6 @@ namespace Oracle.Dapper.NetCore.Console.Example.Core
             {
                 await Task.WhenAny(_executingTask, Task.Delay(Timeout.Infinite, cancellationToken));
             }
-
         }
 
         public virtual void Dispose()

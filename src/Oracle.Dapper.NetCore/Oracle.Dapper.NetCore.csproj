@@ -1,52 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <IsPackable>true</IsPackable>
-    <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
-    <Version>1.0.0</Version>
-    <PackageLicenseUrl>https://github.com/joaomissio/Oracle.Dapper.NetCore/blob/main/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/joaomissio/Oracle.Dapper.NetCore</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/joaomissio/Oracle.Dapper.NetCore.git</RepositoryUrl>
-    <PackageTags>netcore oracle dapper</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <Authors>João Orlando Missio</Authors>
-    <Description>Package to simplify the use of Oracle database in .Net Core projects. This package already implements the use of the micro ORM Dapper to make it even easier.</Description>
-    <AssemblyName>Oracle.Dapper.NetCore</AssemblyName>
-    <RootNamespace>Oracle.Dapper.NetCore</RootNamespace>
-    <PackageIcon>dotnet.png</PackageIcon>
-    <PackageIconFullPath>$(MSBuildThisFileDirectory)dotnet.png</PackageIconFullPath>
-    <RepositoryType>git</RepositoryType>
-  </PropertyGroup>
+	<PropertyGroup>
+		<IsPackable>true</IsPackable>
+		<TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
+		<Version>1.0.0</Version>
+		<PackageLicenseUrl>https://github.com/joaomissio/Oracle.Dapper.NetCore/blob/main/LICENSE</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/joaomissio/Oracle.Dapper.NetCore</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/joaomissio/Oracle.Dapper.NetCore.git</RepositoryUrl>
+		<PackageTags>netcore oracle dapper</PackageTags>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<Authors>João Orlando Missio</Authors>
+		<Description>Package to simplify the use of Oracle database in .Net Core projects. This package already implements the use of the micro ORM Dapper to make it even easier.</Description>
+		<AssemblyName>Oracle.Dapper.NetCore</AssemblyName>
+		<RootNamespace>Oracle.Dapper.NetCore</RootNamespace>
+		<PackageIcon>dotnet.png</PackageIcon>
+		<PackageIconFullPath>$(MSBuildThisFileDirectory)dotnet.png</PackageIconFullPath>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-    <PackageReference Include="Dapper" Version="2.0.123" />
-    <PackageReference Include="Dapper.Oracle" Version="2.0.3" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<PackageReference Include="Dapper" Version="2.0.123" />
+		<PackageReference Include="Dapper.Oracle" Version="2.0.3" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
+	</ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="Dapper" Version="2.0.123" />
-    <PackageReference Include="Dapper.Oracle" Version="2.0.3" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.22" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+		<PackageReference Include="Dapper" Version="2.0.123" />
+		<PackageReference Include="Dapper.Oracle" Version="2.0.3" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.22" />
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Oracle.ManagedDataAccess">
-      <HintPath>lib\Oracle.ManagedDataAccess.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="Oracle.ManagedDataAccess">
+			<HintPath>lib\Oracle.ManagedDataAccess.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\docs\dotnet.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\docs\dotnet.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Polly" Version="7.2.3" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Polly" Version="7.2.3" />
+	</ItemGroup>
 </Project>

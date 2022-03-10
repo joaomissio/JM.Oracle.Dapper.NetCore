@@ -4,7 +4,7 @@ using System;
 
 namespace Oracle.Dapper.NetCore.Context
 {
-    public class DefaultDbContextFactory<TContext> where TContext : IDbContext
+    internal class DefaultDbContextFactory<TContext> where TContext : IDbContext
     {
         public TContext CreateDbContext(string connectionString)
         {

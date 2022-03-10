@@ -10,6 +10,12 @@ namespace Oracle.Dapper.NetCore.DependencyInjection
 {
     public static class DapperExtensions
     {
+        /// <summary>
+        /// register oracle dependencies as scoped
+        /// </summary>
+        /// <typeparam name="TContext"></typeparam>
+        /// <param name="services"></param>
+        /// <param name="connectionString"></param>
         public static void AddScopedOracleDapper<TContext>(this IServiceCollection services, string connectionString)
             where TContext : class, IDbContext
         {
@@ -18,6 +24,12 @@ namespace Oracle.Dapper.NetCore.DependencyInjection
             services.TryAddScoped(provider => ResolveDbContextWithDapper<TContext>(provider, connectionString));
         }
 
+        /// <summary>
+        /// register oracle dependencies as transient - suitable for parallel and multi-thread executions
+        /// </summary>
+        /// <typeparam name="TContext"></typeparam>
+        /// <param name="services"></param>
+        /// <param name="connectionString"></param>
         public static void AddTransientOracleDapper<TContext>(this IServiceCollection services, string connectionString)
             where TContext : class, IDbContext
         {

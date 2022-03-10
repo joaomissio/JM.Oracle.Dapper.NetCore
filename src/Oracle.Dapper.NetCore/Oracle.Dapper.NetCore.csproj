@@ -19,17 +19,18 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-		<PackageReference Include="Dapper" Version="2.0.123" />
-		<PackageReference Include="Dapper.Oracle" Version="2.0.3" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.22" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
 		<PackageReference Include="Dapper" Version="2.0.123" />
 		<PackageReference Include="Dapper.Oracle" Version="2.0.3" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.22" />
-		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
+		<PackageReference Include="Polly" Version="7.2.3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -44,9 +45,5 @@
 			<PackagePath></PackagePath>
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Polly" Version="7.2.3" />
-	</ItemGroup>
+	</ItemGroup>	
 </Project>

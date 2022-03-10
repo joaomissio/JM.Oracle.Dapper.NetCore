@@ -14,18 +14,24 @@ namespace Oracle.Dapper.NetCore.Console.Example.HostServices
             _exampleRepository = exampleRepository;
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var resultado = _exampleRepository.GetDays();
-
-            if (resultado != null)
+            var resultado2 = await _exampleRepository.GetDaysAsync();
+            if (resultado != null && resultado2 != null)
             {
+                System.Console.WriteLine("Result of GetDays:");
                 foreach (var item in resultado)
                 {
                     System.Console.WriteLine(item);
                 }
+
+                System.Console.WriteLine("Result of GetDaysAsync:");
+                foreach (var item in resultado2)
+                {
+                    System.Console.WriteLine(item);
+                }
             }
-            return Task.CompletedTask;
         }
     }
 }

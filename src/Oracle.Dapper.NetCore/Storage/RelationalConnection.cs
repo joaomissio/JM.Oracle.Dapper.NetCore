@@ -8,11 +8,11 @@ namespace Oracle.Dapper.NetCore.Storage
 {
     public abstract class RelationalConnection : IRelationalConnection
     {
-        private string? _connectionString;
-        private DbConnection? _connection;
+        private string _connectionString;
+        private DbConnection _connection;
         private int _openedCount;
 
-        public virtual string? ConnectionString
+        public virtual string ConnectionString
         {
             get => _connectionString ?? _connection?.ConnectionString;
             internal set

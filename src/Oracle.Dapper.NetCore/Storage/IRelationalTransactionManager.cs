@@ -13,6 +13,6 @@ namespace Oracle.Dapper.NetCore.Storage
         IDbContextTransaction BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();
-        IDbContextTransaction? CurrentTransaction { get; }
+        IDbContextTransaction CurrentTransaction { get; }
     }
 }

@@ -6,10 +6,10 @@ namespace Oracle.Dapper.NetCore.Storage
 {
     public interface IRelationalConnection : IRelationalTransactionManager, IDisposable
     {
-        string? ConnectionString { get;}
+        string ConnectionString { get;}
         DbConnection DbConnection { get;}
         DbContext Context { get; }
-        new IDbContextTransaction? CurrentTransaction { get; }
+        new IDbContextTransaction CurrentTransaction { get; }
         Guid ConnectionId { get; }
         bool Open(bool errorsExpected = false);
         bool Close();

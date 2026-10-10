@@ -3,21 +3,38 @@
 	<PropertyGroup>
 		<IsPackable>true</IsPackable>
 		<Nullable>Disable</Nullable>
-		<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0</TargetFrameworks>
-		<Version>2.0.0</Version>
+		<TargetFrameworks>netcoreapp3.1;net5.0;net6.0;net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
+		<LangVersion>10.0</LangVersion>
+		<CheckEolTargetFramework>false</CheckEolTargetFramework>
+		<SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+		<Version>3.0.0</Version>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 
 		<PackageProjectUrl>https://github.com/joaomissio/JM.Oracle.Dapper.NetCore</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/joaomissio/JM.Oracle.Dapper.NetCore.git</RepositoryUrl>
-		<PackageTags>netcore oracle dapper</PackageTags>
-		<PackageReleaseNotes></PackageReleaseNotes>
+		<PackageTags>netcore net8 net9 net10 oracle dapper odp.net</PackageTags>
+		<PackageReleaseNotes>3.0.0: support for .NET 8, 9 and 10. Oracle.ManagedDataAccess.Core 23.26 (official ODP.NET Core driver). Fixed sequential transactions on the same context, QueryFirstOrDefault&lt;T&gt;, retry on transient ORA errors and exception unwrapping on context creation. AddScopedOracleDapper/AddTransientOracleDapper now return IServiceCollection.</PackageReleaseNotes>
 		<Authors>João Orlando Missio</Authors>
 		<Description>Package to simplify the use of Oracle database in .Net Core projects. This package already implements the use of the micro ORM Dapper to make it even easier.</Description>
 		<AssemblyName>JM.Oracle.Dapper.NetCore</AssemblyName>
 		<PackageIcon>dotnet.png</PackageIcon>
-		<PackageIconFullPath>$(MSBuildThisFileDirectory)dotnet.png</PackageIconFullPath>
 		<RepositoryType>git</RepositoryType>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
@@ -36,27 +53,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
-		<PackageReference Include="Dapper" Version="2.0.123" />
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.26.301" />
+		<PackageReference Include="Dapper" Version="2.1.89" />
 		<PackageReference Include="Dapper.Oracle" Version="2.0.3" />
-		<PackageReference Include="Polly" Version="7.2.3" />
+		<PackageReference Include="Polly" Version="7.2.4" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="Oracle.ManagedDataAccess">
-			<HintPath>lib\Oracle.ManagedDataAccess.dll</HintPath>
-		</Reference>
+		<InternalsVisibleTo Include="Oracle.Dapper.NetCore.Tests" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\..\licenses\LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\..\docs\dotnet.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
+		<None Include="..\..\README.md" Pack="true" PackagePath="README.md" />
+		<None Include="..\..\docs\dotnet.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 </Project>

@@ -19,6 +19,7 @@ namespace Oracle.Dapper.NetCore.Storage
         private static readonly int[] OracleTransientErrors = new[]
         {
             -1000, 50000,
+            50232, // TCP connect failure: what the driver reports on Linux when the listener refuses the connection
             3113, 3114, 3135,
             12170, 12514, 12528, 12537, 12541, 12545, 12571
         };

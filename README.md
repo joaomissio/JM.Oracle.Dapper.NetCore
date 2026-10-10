@@ -162,8 +162,9 @@ Errors that trigger a new attempt in `OpenOracleConnection`:
 | ORA-03113, ORA-03114, ORA-03135 | session dropped / not connected |
 | ORA-12170, ORA-12537, ORA-12571 | network timeout or closed connection |
 | ORA-12514, ORA-12528, ORA-12541, ORA-12545 | listener or service not available |
+| ORA-50232 | TCP connection failure (reported on Linux when the listener refuses the connection) |
 
-The driver reports network failures as `ORA-50201` and keeps the real cause (for example `ORA-12541`) in the inner exception. The retry policy inspects the inner exceptions too.
+The driver reports network failures as `ORA-50201` and keeps the real cause (for example `ORA-12541` on Windows, `ORA-50232` on Linux) in the inner exception. The retry policy inspects the inner exceptions too.
 
 Other errors (invalid user, invalid connect string, invalid SQL, constraint violation) are thrown immediately.
 

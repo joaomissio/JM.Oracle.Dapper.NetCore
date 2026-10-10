@@ -76,6 +76,7 @@ namespace Oracle.Dapper.NetCore.Tests
         [InlineData(3114)]
         [InlineData(12541)]
         [InlineData(12170)]
+        [InlineData(50232)]
         public void RetryPolicy_TreatsConnectivityErrorsAsTransient(int oracleErrorNumber)
         {
             Assert.True(DatabaseCommunicationRetryPolicy.IsTransient(oracleErrorNumber));
@@ -112,7 +113,8 @@ namespace Oracle.Dapper.NetCore.Tests
 
             var exception = Assert.Throws<OracleException>(() => connection.Open());
 
-            // driver 23.x reports ORA-50201 and keeps ORA-12541 (no listener) in the inner exception
+            // driver 23.x reports ORA-50201 and keeps the cause in the inner exception:
+            // ORA-12541 (no listener) on Windows, ORA-50232 (TCP connect failure) on Linux
             Assert.True(DatabaseCommunicationRetryPolicy.IsTransient(exception), exception.ToString());
         }
 

@@ -1,6 +1,5 @@
 ﻿using Oracle.Dapper.NetCore.Dapper;
 using Oracle.ManagedDataAccess.Client;
-using Polly.Retry;
 using System.Data.Common;
 
 namespace Oracle.Dapper.NetCore.Storage.Oracle

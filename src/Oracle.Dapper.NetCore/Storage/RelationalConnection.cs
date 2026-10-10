@@ -103,6 +103,17 @@ namespace Oracle.Dapper.NetCore.Storage
             CurrentTransaction.Rollback();
         }
 
+        /// <summary>
+        /// Detaches a finished transaction from the connection, so a new one can be started.
+        /// </summary>
+        internal void ReleaseTransaction(IDbContextTransaction transaction)
+        {
+            if (ReferenceEquals(CurrentTransaction, transaction))
+            {
+                CurrentTransaction = null;
+            }
+        }
+
         public virtual bool Open(bool errorsExpected = false)
         {
             if (DbConnection.State == ConnectionState.Broken)
@@ -114,6 +125,7 @@ namespace Oracle.Dapper.NetCore.Storage
             if (DbConnection.State != ConnectionState.Open)
             {
                 CurrentTransaction?.Dispose();
+                CurrentTransaction = null;
                 OpenDbConnection(errorsExpected);
                 wasOpened = true;
             }
@@ -131,17 +143,9 @@ namespace Oracle.Dapper.NetCore.Storage
                 CurrentTransaction = null;
                 if (DbConnection.State != ConnectionState.Closed)
                 {
-                    try
-                    {
-                        CloseDbConnection();
-                        _openedCount = 0;
-                        wasClosed = true;
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Erro ao fechar conexão");
-                        throw;
-                    }
+                    CloseDbConnection();
+                    _openedCount = 0;
+                    wasClosed = true;
                 }
             }
 

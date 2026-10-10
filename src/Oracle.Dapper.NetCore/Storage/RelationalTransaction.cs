@@ -28,16 +28,23 @@ namespace Oracle.Dapper.NetCore.Storage
             _transactionOwned = transactionOwned;
         }
 
+        /// <summary>
+        /// Commits the transaction and releases it from the connection.
+        /// If the commit fails the transaction stays active, so it can still be rolled back.
+        /// </summary>
         public void Commit()
         {
             _dbTransaction.Commit();
-            ClearTransaction();
+            Dispose();
         }
 
+        /// <summary>
+        /// Rolls back the transaction and releases it from the connection.
+        /// </summary>
         public void Rollback()
         {
             _dbTransaction.Rollback();
-            ClearTransaction();
+            Dispose();
         }
 
         protected virtual void ClearTransaction()
@@ -46,6 +53,7 @@ namespace Oracle.Dapper.NetCore.Storage
             {
                 _connectionClosed = true;
 
+                (Connection as RelationalConnection)?.ReleaseTransaction(this);
                 Connection.Close();
             }
         }

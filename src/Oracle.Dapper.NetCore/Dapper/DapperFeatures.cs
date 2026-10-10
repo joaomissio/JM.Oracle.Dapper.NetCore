@@ -46,7 +46,7 @@ namespace Oracle.Dapper.NetCore.Dapper
             _connection.QueryFirstOrDefault(sql, param, transaction, commandTimeout, commandType);
 
         public T QueryFirstOrDefault<T>(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null) =>
-            _connection.QueryFirstOrDefault(sql, param, transaction, commandTimeout, commandType);
+            _connection.QueryFirstOrDefault<T>(sql, param, transaction, commandTimeout, commandType);
 
         public object QueryFirstOrDefault(Type type, string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = null, CommandType? commandType = null) =>
             _connection.QueryFirstOrDefault(type, sql, param, transaction, commandTimeout, commandType);

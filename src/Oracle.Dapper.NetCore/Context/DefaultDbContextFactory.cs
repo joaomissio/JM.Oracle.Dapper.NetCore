@@ -1,6 +1,8 @@
 ﻿using Oracle.Dapper.NetCore.CustomExceptions;
 using Oracle.Dapper.NetCore.Infrastructure;
 using System;
+using System.Reflection;
+using System.Runtime.ExceptionServices;
 
 namespace Oracle.Dapper.NetCore.Context
 {
@@ -9,7 +11,16 @@ namespace Oracle.Dapper.NetCore.Context
         public TContext CreateDbContext(string connectionString)
         {
             var provider = GetProviderContext(connectionString);
-            return (TContext)Activator.CreateInstance(typeof(TContext), provider.ConnectionString);
+            try
+            {
+                return (TContext)Activator.CreateInstance(typeof(TContext), provider.ConnectionString);
+            }
+            catch (TargetInvocationException exception) when (exception.InnerException != null)
+            {
+                // surface the real error (e.g. OracleException) instead of the reflection wrapper
+                ExceptionDispatchInfo.Capture(exception.InnerException).Throw();
+                throw;
+            }
         }
 
         private static ProviderContext GetProviderContext(string connectionString)

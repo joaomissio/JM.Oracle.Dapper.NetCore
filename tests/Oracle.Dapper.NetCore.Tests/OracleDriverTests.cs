@@ -113,7 +113,7 @@ namespace Oracle.Dapper.NetCore.Tests
             var exception = Assert.Throws<OracleException>(() => connection.Open());
 
             // driver 23.x reports ORA-50201 and keeps ORA-12541 (no listener) in the inner exception
-            Assert.True(DatabaseCommunicationRetryPolicy.IsTransient(exception));
+            Assert.True(DatabaseCommunicationRetryPolicy.IsTransient(exception), exception.ToString());
         }
 
         [Fact]
@@ -121,8 +121,8 @@ namespace Oracle.Dapper.NetCore.Tests
         {
             using var connection = new LazyOracleConnection("User Id=x;Password=y;Data Source=127.0.0.1:1/NOPE;Connection Timeout=5");
 
-            Assert.Throws<OracleException>(() => connection.OpenOracleConnection(true));
-            Assert.Equal(4, connection.OpenAttempts);
+            var exception = Assert.Throws<OracleException>(() => connection.OpenOracleConnection(true));
+            Assert.True(connection.OpenAttempts == 4, $"attempts={connection.OpenAttempts} {exception}");
         }
 
         [Fact]
